@@ -139,7 +139,19 @@ college_recent_grads %>%
 
 1.  Using what you've learned so far, arrange the data in descending order with respect to proportion of women in a major, and display only the major, the total number of people with major, and proportion of women. Show only the top 3 majors by adding `top_n(3)` at the end of the pipeline.
 
+
+```{r women-in-major}
+
+college_recent_grads %>%
+  arrange(desc(women)) %>%
+  select(major, total, sharewomen) %>%
+  top_n(3)
+
+```
+
+
 ## How do the distributions of median income compare across major categories?
+
 
 ```{marginfigure}
 A percentile is a measure used in statistics indicating the value below which a given percentage of observations in a group of observations fall. For example, the 20th percentile is the value below which 20% of the observations may be found. (Source: [Wikipedia](https://en.wikipedia.org/wiki/Percentile)
@@ -149,6 +161,8 @@ There are three types of incomes reported in this data frame: `p25th`, `median`,
 These correspond to the 25th, 50th, and 75th percentiles of the income distribution of sampled individuals for a given major.
 
 2.  Why do we often choose the median, rather than the mean, to describe the typical income of a group of people?
+
+***The reason it is sometimes better to choose median instead of mean is because if we take the mean the data can be thrown off by outliers such as the "ultra rich" who are making way more than what is expected for their degree, and by those who are barely making any income. The median will do the best job at showing the true middle income.
 
 The question we want to answer "How do the distributions of median income compare across major categories?".
 We need to do a few things to answer this question: First, we need to group the data by `major_category`.
